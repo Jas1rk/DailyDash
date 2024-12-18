@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode:"class",
+  darkMode: "class", // Enables dark mode support
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     container: {
@@ -15,8 +15,19 @@ export default {
     },
     extend: {
       colors: {
-        blackScreen: "#240a1e",
-        whiteScreen: "#f4d6f2",
+        colors: {
+          // Primary yellow and hover
+          primaryYellow: "#F7B500",
+          hoverYellow: "#F9A825",
+
+          // Dark Mode and Light Mode Colors
+          blackScreen: "#121212",
+          whiteScreen: "#dddddd",
+          darkComponent: "#1E1E1E",
+          lightComponent: "#FFFFFF",
+          lightText: "#E4E4E4",
+          darkText: "#1E1E1E",
+        },
       },
     },
   },

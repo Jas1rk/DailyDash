@@ -3,15 +3,20 @@ import { navItems } from "./Navitems";
 import { RiMenuFold4Line } from "react-icons/ri";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { PiSignInFill } from "react-icons/pi";
-import { CommonButton, MobileNavbar } from "..";
+import { CommonButton, DarkModeToggle, MobileNavbar } from "..";
+import logo from '../../assets/logo.png'
+
 
 const DesktopNav = () => {
   const [menu, setMenu] = useState<boolean>(false);
   return (
     <>
-      <header className="bg-green-200 dark:bg-whiteScreen  z-50">
+      <header className="bg-transparent dark:text-white dark:bg-whiteScreen  z-50">
         <nav className="container mx-auto flex justify-between items-center p-3">
-          <h1 className="text-lg">DailyDash</h1>
+          <div className="flex items-end">
+          <img src={logo} className="w-[50px]"/>
+          <h1 className="text-xl mb-2 font-semibold">ailyDash</h1>
+          </div>
           {/* <Input
             className=" rounded-full flex gap-2 justify-center  items-center "
             placeholder="search task..."
@@ -22,19 +27,21 @@ const DesktopNav = () => {
             {navItems.map((data, index) => (
               <li
                 key={index}
-                className="cursor-pointer text-gray-600 font-sans text-sm py-2 px-4 rounded-md transition duration-200 ease-in-out hover:text-[#f83c86] overflow-hidden"
+                className="cursor-pointer flex gap-2 items-center  dark:text-white text-black font-sans text-sm py-2 px-4 rounded-md transition duration-200 ease-in-out hover:text-[#f83c86] overflow-hidden"
               >
-                {data.title}
+               {data.icon} {data.title}
               </li>
             ))}
           </ul>
           <div className="hidden md:flex gap-5">
             <CommonButton icon={<PiSignInFill />} >sign-in</CommonButton>
             <CommonButton icon={<SiGnuprivacyguard />}>sign-up</CommonButton>
+            <DarkModeToggle/>
           </div>
           <div className="md:hidden text-2xl cursor-pointer hover:text-[#f83c86]">
             <RiMenuFold4Line onClick={() => setMenu(true)} />
           </div>
+       
         </nav>
         {menu && (
           <>
