@@ -1,3 +1,5 @@
+import Navbar from "../Header/Navbar";
+
 const Login = () => {
   return (
     <>

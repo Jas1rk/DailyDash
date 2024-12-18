@@ -34,26 +34,30 @@ const MobileNav = ({ onClose }: MobileNav) => {
     <>
       <AnimatePresence>
         <motion.div
-          className="fixed top-0 right-0 w-1/2 h-screen bg-[#55021a] text-white flex flex-col p-6 space-y-4 z-50"
+          className="fixed top-0 right-0 w-1/2 h-screen bg-colors-primaryYellow text-white flex flex-col p-6 space-y-4 z-50 "
           initial="hidden"
           animate="visible"
           exit="exit"
           variants={navVariants}
         >
-          <div className="text-2xl cursor-pointer hover:text-[#f83c86] flex justify-end">
+          <div className=" absolute text-3xl cursor-pointer p-1 hover:text-colors-hoverYellow bg-colors-primaryYellow rounded-s-full flex justify-end top-4 -left-4">
             <IoIosCloseCircleOutline onClick={onClose} />
           </div>
           <ul>
             {navItems.map((data, index) => (
               <li
                 key={index}
-                className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 cursor-pointer transition duration-300 ease-in-out"
+                className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out"
               >
                 {data.title}
               </li>
             ))}
-            <li>Sign-in</li>
-            <li>Sign-up</li>
+            <li className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out">
+              Sign-in
+            </li>
+            <li className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out">
+              Sign-up
+            </li>
           </ul>
         </motion.div>
       </AnimatePresence>

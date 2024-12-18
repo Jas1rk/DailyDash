@@ -8,7 +8,7 @@ type Button = {
 const Button = ({ children, icon }: Button) => {
   return (
     <>
-      <button className="bg-colors-primaryYellow  flex gap-2 justify-center items-center hover:bg-colors-hoverYellow text-[#4a083d] p-2 w-32 rounded-3xl">
+      <button className="bg-colors-primaryYellow  flex gap-2 justify-center items-center hover:bg-colors-hoverYellow text-black p-2 w-32 rounded-3xl">
         {icon && <span>{icon}</span>}
         {children}
       </button>
