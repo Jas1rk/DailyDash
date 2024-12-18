@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { AiFillSun } from "react-icons/ai";
 
