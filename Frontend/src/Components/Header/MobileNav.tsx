@@ -1,67 +1,25 @@
-import React from "react";
-import { navItems } from "./Navitems";
-import { motion, AnimatePresence } from "framer-motion";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
+import { RiLoginCircleFill } from "react-icons/ri";
 
-const navVariants = {
-  hidden: {
-    x: "100%", // Ensure it's off-screen initially
-  },
-  visible: {
-    x: 0, // Slide into view
-    transition: {
-      type: "spring",
-      stiffness: 270,
-      damping: 30,
-    },
-  },
-  exit: {
-    x: "100%", // Slide out to the right
-    transition: {
-      type: "spring",
-      stiffness: 270,
-      damping: 30,
-    },
-  },
-};
-
-type MobileNav = {
-  onClose: () => void;
-};
-
-const MobileNav = ({ onClose }: MobileNav) => {
+const MobileNav = () => {
   return (
-    <>
-      <AnimatePresence>
-        <motion.div
-          className="fixed top-0 right-0 w-1/2 h-screen bg-colors-primaryYellow text-white flex flex-col p-6 space-y-4 z-50 "
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={navVariants}
-        >
-          <div className=" absolute text-3xl cursor-pointer p-1 hover:text-colors-hoverYellow bg-colors-primaryYellow rounded-s-full flex justify-end top-4 -left-4">
-            <IoIosCloseCircleOutline onClick={onClose} />
-          </div>
-          <ul>
-            {navItems.map((data, index) => (
-              <li
-                key={index}
-                className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out"
-              >
-                {data.title}
-              </li>
-            ))}
-            <li className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out">
-              Sign-in
-            </li>
-            <li className=" hover:text-gray-200 hover:underline hover:underline-offset-4 hover:decoration-2 text-black cursor-pointer transition duration-300 ease-in-out">
-              Sign-up
-            </li>
-          </ul>
-        </motion.div>
-      </AnimatePresence>
-    </>
+    <div className="fixed rounded-full bottom-10 left-2/4 transform -translate-x-1/2 bg-colors-primaryYellow h-[55px] w-[80%] shadow-md dark:shadow-[0_4px_6px_-1px_rgba(247,181,0,0.6),0_2px_4px_-2px_rgba(247,181,0,0.4)]">
+      <div className="w-full flex justify-around items-center h-full text-white dark:text-colors-darkComponent">
+        <div className="flex items-center justify-center flex-col">
+          <FaHome className="text-2xl" />
+          <p className="text-xs">Home</p>
+        </div>
+        <div className="flex items-center justify-center flex-col">
+          <IoSettings className="text-2xl" />
+          <p className="text-xs">Settings</p>
+        </div>
+        <div className="flex items-center justify-center flex-col">
+          <RiLoginCircleFill className="text-2xl" />
+          <p className="text-xs">Login</p>
+        </div>
+      </div>
+    </div>
   );
 };
 

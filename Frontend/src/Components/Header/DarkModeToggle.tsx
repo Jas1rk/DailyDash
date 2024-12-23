@@ -7,7 +7,7 @@ const DarkModeToggle = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
+    if (savedTheme === "dark") {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     } else if (savedTheme === "light") {
@@ -19,6 +19,7 @@ const DarkModeToggle = () => {
       ).matches;
       setIsDarkMode(darkModePreference);
       if (darkModePreference) {
+        localStorage.setItem("theme", "dark");
         document.documentElement.classList.add("dark");
       }
     }
@@ -39,12 +40,12 @@ const DarkModeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="w-[30px] md:w-[40px] h-[30px] md:h-[40px] rounded-full flex items-center justify-center dark:bg-white bg-colors-darkComponent dark:text-colors-primaryYellow text-white"
+      className="w-[40px] h-[40px] rounded-full flex items-center justify-center dark:bg-white bg-colors-darkComponent dark:text-colors-primaryYellow text-white"
     >
       {isDarkMode ? (
-        <AiFillSun className="text-sm md:text-lg" />
+        <AiFillSun className="text-lg" />
       ) : (
-        <FaMoon className="text-sm md:text-lg" />
+        <FaMoon className="text-lg" />
       )}
     </button>
   );

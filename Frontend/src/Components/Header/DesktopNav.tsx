@@ -1,17 +1,14 @@
-import { useState } from "react";
 import { navItems } from "./Navitems";
-import { RiMenuFold4Line } from "react-icons/ri";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { PiSignInFill } from "react-icons/pi";
 import { CommonButton, DarkModeToggle, MobileNavbar } from "..";
 import logo from "../../assets/logo.png";
 
 const DesktopNav = () => {
-  const [menu, setMenu] = useState<boolean>(false);
   return (
     <>
       <header className="bg-transparent dark:text-white dark:bg-whiteScreen  z-50 ">
-        <nav className="container mx-auto flex justify-between items-center p-3">
+        <nav className="container mx-auto flex justify-between items-center p-4">
           <div className="flex items-end">
             <img src={logo} className="w-[40px] md:w-[50px]" />
             <h1 className="text-xl mb-2 font-semibold">ailyDash</h1>
@@ -31,21 +28,13 @@ const DesktopNav = () => {
             <CommonButton icon={<SiGnuprivacyguard />}>sign-up</CommonButton>
             <DarkModeToggle />
           </div>
-          <div className="md:hidden text-2xl cursor-pointer hover:text-colors-hoverYellow flex gap-3 justify-center items-center">
+          <div className="md:hidden cursor-pointer hover:text-colors-hoverYellow ">
             <DarkModeToggle />
-
-            <RiMenuFold4Line onClick={() => setMenu(true)} />
           </div>
         </nav>
-        {menu && (
-          <>
-            <div
-              className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-40"
-              onClick={() => setMenu(false)}
-            ></div>
-            <MobileNavbar onClose={() => setMenu(false)} />
-          </>
-        )}
+        <div className="md:hidden">
+          <MobileNavbar />
+        </div>
       </header>
     </>
   );
