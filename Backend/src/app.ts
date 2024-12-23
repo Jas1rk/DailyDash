@@ -1,8 +1,10 @@
 import express, { Application } from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import databaseConnection from './Config/mongoconnect'
 
 dotenv.config()
+databaseConnection()
 
 const app: Application = express()
 
