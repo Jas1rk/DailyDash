@@ -49,7 +49,7 @@ export const verifyRefreshToken = (req: Request, res: Response, next: NextFuncti
     try {
         const refreshToken = req.cookies["refreshToken"]
         if (!refreshToken) {
-            return res.status(401).json({ message: "No Refresh Token Provided" })
+            return res.status(httpStatus_Code.Unauthorized).json({ message: "No Refresh Token Provided" })
         }
 
         jwt.verify(refreshToken, refreshKey, (err: Error | null, decoded: string | JwtPayload | undefined) => {
