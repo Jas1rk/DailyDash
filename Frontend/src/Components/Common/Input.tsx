@@ -9,10 +9,14 @@ const Input = ({ className, placeholder, type, icon }: Input) => {
   return (
     <>
       <div
-        className={`p-2 text-gray-500 bg-black focus:outline-none focus:ring-1 focus:ring-[#f83c86]${className}`}
+        className={`w-full  font-light bg-colors-whiteScreen dark:bg-colors-blackScreen placeholder:text-colors-primaryYellow mt-2 py-2 px-2 outline-none  ${className}`}
       >
         {icon && <span>{icon}</span>}
-        <input placeholder={placeholder} type={type} className="bg-transparent outline-none " />
+        <input
+          placeholder={placeholder}
+          type={type}
+          className="bg-transparent outline-none  "
+        />
       </div>
     </>
   );

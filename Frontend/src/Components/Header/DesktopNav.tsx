@@ -3,6 +3,7 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { PiSignInFill } from "react-icons/pi";
 import { CommonButton, DarkModeToggle, MobileNavbar } from "..";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const DesktopNav = () => {
   return (
@@ -17,15 +18,20 @@ const DesktopNav = () => {
             {navItems.map((data, index) => (
               <li
                 key={index}
-                className="cursor-pointer flex gap-2 items-center  dark:text-white text-black hover:text-colors-hoverYellow font-sans text-sm py-2 px-4 "
+                className="cursor-pointer flex gap-2 items-center  dark:text-white text-black dark:hover:text-colors-primaryYellow hover:text-colors-hoverYellow font-sans text-sm py-2 px-4 "
               >
                 {data.icon} {data.title}
               </li>
             ))}
           </ul>
           <div className="hidden md:flex gap-5">
-            <CommonButton icon={<PiSignInFill />}>sign-in</CommonButton>
-            <CommonButton icon={<SiGnuprivacyguard />}>sign-up</CommonButton>
+            <Link to="/login">
+              <CommonButton icon={<PiSignInFill />}>sign-in</CommonButton>
+            </Link>
+            <Link to="signup">
+              <CommonButton icon={<SiGnuprivacyguard />}>sign-up</CommonButton>
+            </Link>
+
             <DarkModeToggle />
           </div>
           <div className="md:hidden cursor-pointer hover:text-colors-hoverYellow ">

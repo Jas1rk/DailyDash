@@ -1,5 +1,6 @@
 import { RiLoginCircleFill } from "react-icons/ri";
 import { navItems } from "./Navitems";
+import { Link } from "react-router-dom";
 
 const MobileNav = () => {
   return (
@@ -17,7 +18,9 @@ const MobileNav = () => {
 
         <div className="flex items-center justify-center flex-col">
           <RiLoginCircleFill className="text-2xl" />
-          <p className="text-xs">Login</p>
+          <Link to='/login'>
+            <p className="text-xs">Login</p>
+          </Link>
         </div>
       </div>
     </div>
