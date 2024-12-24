@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Pages/Home.tsx";
+import Home from "../Pages/HomePage.tsx";
 import {
   Error404,
-  LoginSignIn,
   OTP,
   RegisterSignUp,
 } from "../Components/index.ts";
+import LoginPage from "../Pages/LoginPage.tsx";
 
 export const routes = createBrowserRouter([
   {
@@ -15,8 +15,8 @@ export const routes = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      { path: "/auth-sign-in", element: <LoginSignIn /> },
-      { path: "/auth-sign-up", element: <RegisterSignUp /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <RegisterSignUp /> },
       { path: "/auth-otp", element: <OTP /> },
     ],
     errorElement: <Error404 />,

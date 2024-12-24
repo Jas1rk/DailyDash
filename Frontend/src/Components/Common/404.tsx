@@ -10,7 +10,7 @@ const Error404 = () => {
   const error = useRouteError() as RouteError; 
 
   return (
-    <div className="flex flex-col  items-center justify-center min-h-screen">
+    <div className="flex flex-col dark:text-white  items-center justify-center min-h-screen ">
       <h1 className="text-6xl font-bold text-red-500">404</h1>
       <h2 className="text-3xl font-semibold mt-4">Page Not Found</h2>
       <p className="text-lg">
@@ -18,7 +18,7 @@ const Error404 = () => {
       </p>
 
       {error && (
-        <div className="mt-6 bg-mainComponent p-6 shadow-lg rounded-lg">
+        <div className="mt-6  bg-mainComponent p-6 shadow-lg rounded-lg">
           <h3 className="text-xl font-bold">Error Details</h3>
           <p className="mt-2">
             <span className="font-semibold">Status:</span> {error.status || "Unknown"}
