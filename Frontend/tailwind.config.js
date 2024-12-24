@@ -22,7 +22,7 @@ export default {
 
           // Dark Mode and Light Mode Colors
           blackScreen: "#121212",
-          whiteScreen: "#dddddd",
+          whiteScreen: "#f5f5f5",
           darkComponent: "#1E1E1E",
           lightComponent: "#FFFFFF",
           lightText: "#E4E4E4",

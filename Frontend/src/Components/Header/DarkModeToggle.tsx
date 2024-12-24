@@ -1,29 +1,9 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { AiFillSun } from "react-icons/ai";
 
 const DarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else if (savedTheme === "light") {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    } else {
-      const darkModePreference = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setIsDarkMode(darkModePreference);
-      if (darkModePreference) {
-        localStorage.setItem("theme", "dark");
-        document.documentElement.classList.add("dark");
-      }
-    }
-  }, []);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
