@@ -7,7 +7,6 @@ const DarkModeToggle = () => {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    console.log("the dark",isDarkMode)
     if (isDarkMode) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
