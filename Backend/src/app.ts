@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import databaseConnection from './Config/mongoconnect'
 import employRoute from './Router/employroute'
+import companyRoute from './Router/companyroute'
 
 dotenv.config()
 databaseConnection()
@@ -13,6 +14,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/employ', employRoute)
+app.use('/company', companyRoute)
 
 
 const PORT = process.env.PORT || 8001
