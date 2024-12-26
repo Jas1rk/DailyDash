@@ -19,7 +19,7 @@ const DarkModeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="w-[40px] h-[40px] rounded-full flex items-center justify-center dark:bg-white bg-colors-darkComponent dark:text-colors-primaryYellow text-white"
+      className="md:w-[40px] md:h-[40px] h-[30px] w-[30px] rounded-full flex items-center justify-center dark:bg-white bg-colors-darkComponent dark:text-colors-primaryYellow text-white"
     >
       {isDarkMode ? (
         <AiFillSun className="text-lg" />
