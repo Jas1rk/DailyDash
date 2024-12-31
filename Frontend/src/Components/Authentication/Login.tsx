@@ -49,6 +49,9 @@ const Login = () => {
                     />
                   )}
                 </div>
+                <button className="bg-colors-primaryYellow  w-full text-white mt-5 py-2 px-10 rounded-3xl font-bold">
+                  Login
+                </button>
               </div>
             </div>
             <div className="flex items-center justify-center gap-1 mt-2 ">
@@ -59,7 +62,9 @@ const Login = () => {
             <div className="mt-3 flex flex-col gap-4 overflow-hidden">
               <div className="flex items-center justify-around bg-white p-2 border-2  rounded-md">
                 <FcGoogle className="hover:text-colors-primaryYellow text-2xl cursor-pointer dark:text-gray-400 dark:hover:text-colors-primaryYellow" />
-                <p className="font-bold md:font-semibold">Sign in with Google</p>
+                <p className="font-bold md:font-semibold">
+                  Sign in with Google
+                </p>
               </div>
               <div className="w-full flex items-center justify-around shadow-md bg-black p-2 py-3 rounded-md ">
                 <FaGithub className="hover:text-colors-primaryYellow text-2xl cursor-pointer text-white dark:hover:text-colors-primaryYellow" />
@@ -67,13 +72,18 @@ const Login = () => {
                   Sign in with GitHub
                 </p>
               </div>
-              <p className="dark:text-white text-center">Dont have an account ? <Link to="/signup" className="text-colors-primaryYellow font-bold md:font-semibold">Register</Link></p>
+              <p className="dark:text-white text-center">
+                Dont have an account ?{" "}
+                <Link
+                  to="/signup"
+                  className="text-colors-primaryYellow font-bold md:font-semibold"
+                >
+                  Register
+                </Link>
+              </p>
             </div>
           </div>
         </div>
-        <button className="bg-colors-primaryYellow  text-white mt-5 py-2 px-10 rounded-3xl font-bold">
-          Login
-        </button>
       </div>
     </>
   );
