@@ -4,17 +4,17 @@ import logo from "../assets/logo.png";
 const LoginPage = () => {
   return (
     <>
-      <div className="relative w-screen h-screen flex items-center justify-center">
-        <div className="absolute top-5 left-5 flex items-end ml-4">
-          <img src={logo} alt="Logo" className="w-[30px] md:w-[50px]" />
-          <h1 className="text-md md:text-xl md:mb-2  font-semibold dark:text-white">
-            ailyDash
-          </h1>
-        </div>
-        <div className="absolute top-5 right-5 mr-4">
+      <div className="w-screen min-h-screen">
+        <div className="flex justify-between items-center p-5">
+          <div className="flex items-start">
+            <img src={logo} className="w-[30px] md:w-[40px]" />
+            <h1 className="text-xl  font-semibold dark:text-white">ailyDash</h1>
+          </div>
           <DarkModeToggle />
         </div>
-        <Login />
+        <div className="w-screen grid place-items-center pb-10 md:py-0">
+          <Login />
+        </div>
       </div>
     </>
   );
