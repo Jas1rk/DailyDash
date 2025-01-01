@@ -14,7 +14,7 @@ const Login = () => {
           Login
         </h1>
         <div className="flex w-full items-center flex-col md:flex-row md:gap-10">
-          <img src={login} className="w-[270px] md:w-[350px]" />
+          <img src={login} className="w-[270px] md:w-[400px]" />
           <div className="flex flex-col">
             <div>
               <div className="mt-5 w-full">
@@ -49,6 +49,7 @@ const Login = () => {
                     />
                   )}
                 </div>
+                <p className="text-xs text-end mt-1 text-blue-500">Forgot Password?</p>
                 <button className="bg-colors-primaryYellow  w-full text-white mt-5 py-2 px-10 rounded-3xl font-bold">
                   Login
                 </button>
