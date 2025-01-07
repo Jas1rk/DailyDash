@@ -7,6 +7,7 @@ export { default as Signup } from './Authentication/Signup'
 export { default as OTP } from '../Components/Authentication/Otp'
 export { default as LeftSidebar } from '../Components/Sidebar/Leftsidebar'
 export { default as RightSidebar } from '../Components/Sidebar/Rightsidebar'
+export {default as Home} from '../Components/HomePage/Home'
 
 
 
