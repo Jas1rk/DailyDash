@@ -26,10 +26,10 @@ const DesktopNav = () => {
           </ul>
           <div className="hidden md:flex gap-5">
             <Link to="/login">
-              <CommonButton icon={<PiSignInFill />}>sign-in</CommonButton>
+              <CommonButton icon={<PiSignInFill />}>Login</CommonButton>
             </Link>
             <Link to="signup">
-              <CommonButton icon={<SiGnuprivacyguard />}>sign-up</CommonButton>
+              <CommonButton icon={<SiGnuprivacyguard />}>Register</CommonButton>
             </Link>
 
             <DarkModeToggle />
