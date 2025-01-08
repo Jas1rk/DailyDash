@@ -88,7 +88,7 @@ const OtpForm: React.FC = () => {
         </div>
       </form>
       <div className="text-sm text-slate-500 mt-4">
-        Didn't receive code?{" "}
+        Didn't receive code?
         <a className="font-medium text-colors-primaryYellow cursor-pointer">
           Resend
         </a>

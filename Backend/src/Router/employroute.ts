@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { registerController } from "../Controllers/Employ/authController";
+import { registerEmploy } from "../Controllers/Employ/authController";
 
 const employRoute = Router()
+
+employRoute.post('/register-employ',registerEmploy)
 
 export default employRoute

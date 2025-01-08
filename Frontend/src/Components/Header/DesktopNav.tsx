@@ -1,8 +1,8 @@
 import { navItems } from "./Navitems";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { PiSignInFill } from "react-icons/pi";
-import { CommonButton, DarkModeToggle, MobileNavbar } from "..";
-import logo from "../../assets/logo.png";
+import { CommonButton, DailyDashLogo, DarkModeToggle, MobileNavbar } from "..";
+
 import { Link } from "react-router-dom";
 
 const DesktopNav = () => {
@@ -10,10 +10,7 @@ const DesktopNav = () => {
     <>
       <header className="bg-transparent dark:text-white dark:bg-whiteScreen  z-50 ">
         <nav className="container mx-auto flex justify-between items-center p-4">
-          <div className="flex items-end">
-            <img src={logo} className="w-[40px] md:w-[50px]" />
-            <h1 className="text-xl mb-2 font-semibold">ailyDash</h1>
-          </div>
+          <DailyDashLogo />
           <ul className="hidden md:flex gap-5">
             {navItems.map((data, index) => (
               <li

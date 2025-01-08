@@ -28,12 +28,12 @@ const Login = () => {
   });
   return (
     <>
-      <div className="w-[90%]    md:w-auto flex flex-col items-center bg-colors-lightComponent shadow-md dark:shadow-none gap-5  dark:bg-colors-darkComponent p-8 md:p-10 rounded-2xl overflow-hidden">
+      <div className="w-[90%]  md:w-auto flex flex-col items-center bg-colors-lightComponent shadow-md dark:shadow-none gap-5  dark:bg-colors-darkComponent p-8 md:p-10 rounded-2xl overflow-hidden">
         <h1 className="dark:text-white text-2xl font-bold text-center">
           Login
         </h1>
         <div className="flex w-full items-center flex-col md:flex-row md:gap-10">
-          <img src={login} className="w-[270px] md:w-[400px]" />
+          <img src={login} className=" hidden md:block w-[270px] md:w-[350px]" />
           <div className="flex flex-col">
             <form onSubmit={formik.handleSubmit}>
               <div className="mt-5 w-full">
