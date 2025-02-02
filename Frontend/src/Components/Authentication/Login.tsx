@@ -28,7 +28,7 @@ const Login = () => {
   });
   return (
     <>
-      <div className="w-[90%] md:w-auto  flex flex-col items-center bg-colors-lightComponent shadow-md dark:shadow-none gap-5  dark:bg-colors-darkComponent p-8 md:p-10 rounded-2xl overflow-hidden">
+      <div className="w-[90%] md:w-auto  flex flex-col items-center bg-colors-lightComponent shadow-md dark:shadow-none gap-5  dark:bg-colors-darkComponent p-8 md:p-10 rounded-2xl ">
         <h1 className="dark:text-white text-2xl font-bold text-center">
           Login
         </h1>

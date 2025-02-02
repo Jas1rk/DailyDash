@@ -7,7 +7,7 @@ const SignupPage = () => {
         <DailyDashLogo />
         <DarkModeToggle />
       </div>
-      <div className="w-screen grid place-items-center  md:py-0">
+      <div className="w-screen grid place-items-center  md:py-4">
         <Signup />
       </div>
     </div>

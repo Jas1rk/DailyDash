@@ -8,7 +8,7 @@ const LoginPage = () => {
           <DailyDashLogo />
           <DarkModeToggle />
         </div>
-        <div className="w-screen place-items-center md:py-0">
+        <div className="w-screen place-items-center md:py-4">
           <Login />
         </div>
       </div>
