@@ -1,12 +1,11 @@
-
-
 const Rightsidebar = () => {
   return (
-    <div className="w-auto p-4 bg-green-400 place-items-end">
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum consectetur obcaecati, expedita amet explicabo fugiat porro dolore nihil minus vel sed ratione accusantium quidem cumque optio ullam placeat maiores enim!</h1>
-      
+    <div className="hidden md:block w-full p-4 h-screen sticky place-items-end  border-l-2 border-colors-primaryYellow">
+      <h1 className="text-2xl font-bold text-colors-darkComponent dark:text-white">
+        Pick a Date
+      </h1>
     </div>
-  )
-}
+  );
+};
 
-export default Rightsidebar
+export default Rightsidebar;
