@@ -1,13 +1,35 @@
-
+import swiper1 from '../../assets/swip1.svg'
+import swiper2 from '../../assets/swip2.svg'
+import swiper3 from '../../assets/swip3.svg'
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const Home = () => {
   return (
-    <div className="flex">
-    
-      <div className="bg-red-500 p-4 border rounded border-yellow-400">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis ex, omnis doloremque aliquam cupiditate suscipit obcaecati sit molestias magni corrupti repellat inventore nesciunt sequi odio repudiandae quod blanditiis deserunt. Dolores.Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis ex, omnis doloremque aliquam cupiditate suscipit obcaecati sit molestias magni corrupti repellat inventore nesciunt sequi odio repudiandae quod blanditiis deserunt. Dolores.</h2>
-      </div>
-     
+    <div className="flex py-5 px-5 w-auto h-screen">
+      <div className=" p-4 shadow-2xl rounded ">
+      <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          className="rounded"
+        >
+          <SwiperSlide>
+            <img src={swiper1} alt="swip1" className="w-full h-auto rounded" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={swiper2} alt="swip2" className="w-full h-auto rounded" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={swiper3} alt="swip3" className="w-full h-auto rounded" />
+          </SwiperSlide>
+        </Swiper>
+      </div> 
     </div>
   );
 };
