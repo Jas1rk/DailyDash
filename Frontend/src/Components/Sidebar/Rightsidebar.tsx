@@ -14,7 +14,7 @@ const Rightsidebar = () => {
         Pick a Date
       </h1>
       <Calender
-        className=" p-5 mt-1"
+        className=" p-3 mt-1 "
         onChange={handleDate}
         value={date}
         minDate={new Date()}
