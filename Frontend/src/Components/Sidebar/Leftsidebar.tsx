@@ -3,7 +3,7 @@ import { IoAdd } from "react-icons/io5";
 
 const Leftsidebar = () => {
   return (
-    <div className="hidden md:block w-full p-4 h-screen sticky border-r-2 border-colors-primaryYellow">
+    <div className="hidden md:block w-auto p-4 h-screen sticky border-r-2 border-colors-primaryYellow">
       <h1 className="text-2xl font-bold text-colors-darkComponent dark:text-white">Create Your Task</h1>
       <CommonInput
         placeholder="Create your task"

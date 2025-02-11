@@ -12,21 +12,74 @@ body {
 .dark body {
   background-color: #121212;
 }
-For Chrome, Safari, and Edge
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none; /* Remove spin buttons */
-  margin: 0; /* Remove extra margin */
-}
 
-/* For Firefox */
-input[type="number"] {
-  -moz-appearance: textfield; /* Treat as text field */
-}
 
-/* Swiper navigation arrows */
 .swiper-button-next,
 .swiper-button-prev {
   color: #414141 !important;
-  font-size: 10px !important;
+  font-size: 5px !important;
+  font-weight: 100;
+  
+}
+
+:root,
+[data-theme="light"] {
+  --calendar-bg: #FFFFFF;
+  --text-color: black;
+  --selected-date-bg: #cfa739;
+  --selected-date-text: white;
+  --current-date-color: white;
+  --current-date-bg: #F7B500;
+  --disabled-opacity: 0.3;
+  --hover-color: #F9A825;
+}
+
+[data-theme="dark"] {
+  --calendar-bg: #1E1E1E;
+  --text-color: white;
+  --selected-date-bg: #cfa739;
+  --selected-date-text: white;
+  --current-date-color: white;
+  --current-date-bg: #F7B500;
+  --disabled-opacity: 0.3;
+  --hover-color: #F9A825;
+}
+
+.react-calendar {
+  background: var(--calendar-bg) !important;
+  border: none !important;
+  border-radius: 10px;
+  color: var(--text-color);
+}
+
+.react-calendar__navigation {
+  color: var(--text-color);
+}
+
+.react-calendar__month-view__weekdays {
+  color: var(--text-color);
+}
+
+.react-calendar__tile--now {
+  background: var(--current-date-bg) !important;
+  color: var(--current-date-color) !important;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.react-calendar__tile--active {
+  background: var(--selected-date-bg) !important;
+  color: var(--selected-date-text) !important;
+  border-radius: 10px;
+}
+
+.react-calendar__tile:hover {
+  background: var(--hover-color) !important;
+  color: white !important;
+}
+
+.react-calendar__tile--disabled {
+  opacity: var(--disabled-opacity) !important;
+  pointer-events: none;
+  filter: blur(1px);
 }
