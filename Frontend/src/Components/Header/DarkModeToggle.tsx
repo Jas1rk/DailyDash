@@ -4,7 +4,7 @@ import { AiFillSun } from "react-icons/ai";
 
 const DarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
+   localStorage.getItem("theme") === "dark"
   );
 
   useEffect(() => {
@@ -32,3 +32,11 @@ const DarkModeToggle = () => {
 };
 
 export default DarkModeToggle;
+
+
+
+
+
+
+
+
