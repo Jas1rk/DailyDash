@@ -1,5 +1,5 @@
 import { Request, Response, } from "express";
-import httpStatus_Code from "../../Enums/httpStatsuCode";
+import httpStatus_Code from "../../Enums/httpStatusCode";
 
 export const registerCompany = async (req: Request, res: Response) => {
     try {

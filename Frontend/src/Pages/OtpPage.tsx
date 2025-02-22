@@ -1,5 +1,5 @@
 import { DailyDashLogo, DarkModeToggle } from "../Components";
-import OtpForm from "../Components/Authentication/Otp";
+import OtpForm from "../Components/Authentication/Employe/Otp";
 
 const OtpPage = () => {
   return (
