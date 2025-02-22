@@ -1,36 +1,68 @@
-import { useState } from "react";
+import { HTMLInputTypeAttribute, useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import signup from "../../../assets/signup.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { registerValidationSchema } from "./validations";
+
+type FormValues = {
+  name: string;
+  email: string;
+  mobile: string | number;
+  password: string;
+  confirmPassword: string;
+};
+
+const inputFields: {
+  label: string;
+  type: HTMLInputTypeAttribute;
+  placeHolder: string;
+  name: keyof FormValues;
+}[] = [
+  {
+    label: "Name",
+    type: "text",
+    placeHolder: "Enter your full name",
+    name: "name",
+  },
+  {
+    label: "Email",
+    type: "email",
+    placeHolder: "Enter your email",
+    name: "email",
+  },
+  {
+    label: "Mobile",
+    type: "number",
+    placeHolder: "Enter your number",
+    name: "mobile",
+  },
+  {
+    label: "Password",
+    type: "password",
+    placeHolder: "••••••••••",
+    name: "password",
+  },
+  {
+    label: " Confirm Password",
+    type: "password",
+    placeHolder: "••••••••••",
+    name: "confirmPassword",
+  },
+];
 
 const Signup = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const validationSchema = Yup.object({
-    name: Yup.string()
-      .min(3, "Name must be at least 3 characters")
-      .required("Name is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm password is required"),
-  });
-
-  const formik = useFormik({
+  const formik = useFormik<FormValues>({
     initialValues: {
       name: "",
       email: "",
+      mobile: "",
       password: "",
       confirmPassword: "",
     },
-    validationSchema,
+    validationSchema: registerValidationSchema,
     onSubmit: (values) => {
       console.log("Form Data: ", values);
     },
@@ -44,106 +76,49 @@ const Signup = () => {
       <div className="flex w-full items-center flex-col md:flex-row md:gap-10">
         <img src={signup} className="w-[270px] md:w-[400px]" alt="Signup" />
         <form onSubmit={formik.handleSubmit} className="flex flex-col w-full">
-          <div className="mt-5">
-            <label htmlFor="name" className="text-colors-primaryYellow">
-              Full Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter your full name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="w-full placeholder:text-gray-600 bg-colors-whiteScreen dark:bg-colors-blackScreen mt-2 py-1 px-2 outline-none text-colors-primaryYellow border-b-2 text-md border-b-colors-primaryYellow
-              "
-            />
-            {formik.touched.name && formik.errors.name && (
-              <p className="text-red-500 text-xs mt-1 absolute">
-                {formik.errors.name}
-              </p>
-            )}
-          </div>
-          <div className="mt-5">
-            <label htmlFor="email" className="text-colors-primaryYellow">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="example@gmail.com"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="w-full placeholder:text-gray-600 bg-colors-whiteScreen dark:bg-colors-blackScreen mt-2 py-1 px-2 outline-none text-colors-primaryYellow border-b-2 text-md border-b-colors-primaryYellow"
-            />
-            {formik.touched.email && formik.errors.email && (
-              <p className="text-red-500 text-xs mt-1 absolute">
-                {formik.errors.email}
-              </p>
-            )}
-          </div>
-          <div className="mt-5">
-            <label htmlFor="password" className="text-colors-primaryYellow">
-              Password
-            </label>
-            <div className="w-full flex items-center placeholder:text-gray-600 dark:bg-colors-blackScreen bg-colors-whiteScreen mt-2 py-1 px-2 outline-none text-colors-primaryYellow border-b-2 text-md border-b-colors-primaryYellow">
-              <input
-                id="password"
-                name="password"
-                type={isVisible ? "text" : "password"}
-                placeholder="••••••••••"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full bg-transparent outline-none"
-              />
-              {!isVisible ? (
-                <FaEye
-                  className="cursor-pointer"
-                  onClick={() => setIsVisible(true)}
+          {inputFields.map((input, index) => (
+            <div className="mt-5" key={index}>
+              <label htmlFor="name" className="text-colors-primaryYellow">
+                {input.label}
+              </label>
+              <div className="w-full flex items-center placeholder:text-gray-600 dark:bg-colors-blackScreen bg-colors-whiteScreen mt-2 py-1 px-2 outline-none text-colors-primaryYellow border-b-2 text-md border-b-colors-primaryYellow">
+                <input
+                  type={
+                    input.type === "password"
+                      ? isVisible
+                        ? "text"
+                        : "password"
+                      : input.type
+                  }
+                  placeholder={input.placeHolder}
+                  {...formik.getFieldProps(input.name)}
+                  className="w-full bg-transparent outline-none placeholder:text-gray-600"
+                  min={input.type === "number" ? 1 : undefined}
                 />
-              ) : (
-                <FaEyeSlash
-                  className="cursor-pointer"
-                  onClick={() => setIsVisible(false)}
-                />
-              )}
-            </div>
-            {formik.touched.password && formik.errors.password && (
-              <p className="text-red-500 text-xs mt-1 absolute">
-                {formik.errors.password}
-              </p>
-            )}
-          </div>
-          <div className="mt-5">
-            <label
-              htmlFor="confirmPassword"
-              className="text-colors-primaryYellow"
-            >
-              Confirm Password
-            </label>
-            <div className="w-full flex items-center placeholder:text-gray-600 dark:bg-colors-blackScreen bg-colors-whiteScreen mt-2 py-1 px-2 outline-none text-colors-primaryYellow border-b-2 text-md border-b-colors-primaryYellow">
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type={isVisible ? "text" : "password"}
-                placeholder="••••••••••"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full bg-transparent outline-none"
-              />
-            </div>
-            {formik.touched.confirmPassword &&
-              formik.errors.confirmPassword && (
+                {input.type === "password" && (
+                  <>
+                    {isVisible ? (
+                      <FaEyeSlash
+                        className="cursor-pointer"
+                        onClick={() => setIsVisible(false)}
+                      />
+                    ) : (
+                      <FaEye
+                        className="cursor-pointer"
+                        onClick={() => setIsVisible(true)}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+
+              {formik.touched[input.name] && formik.errors[input.name] && (
                 <p className="text-red-500 text-xs mt-1 absolute">
-                  {formik.errors.confirmPassword}
+                  {formik.errors[input.name]}
                 </p>
               )}
-          </div>
+            </div>
+          ))}
           <button
             type="submit"
             className="bg-colors-primaryYellow w-full text-white mt-8 py-2 px-10 rounded-3xl font-bold"
@@ -153,7 +128,7 @@ const Signup = () => {
         </form>
       </div>
       <p className="dark:text-white text-center mt-5">
-        Already have an account?{" "}
+        Already have an account ? {""}
         <Link
           to="/login"
           className="text-colors-primaryYellow font-bold md:font-semibold"
