@@ -1,5 +1,5 @@
 import { useState } from "react";
-import login from "../../assets/login.png";
+import login from "../../../assets/login.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
