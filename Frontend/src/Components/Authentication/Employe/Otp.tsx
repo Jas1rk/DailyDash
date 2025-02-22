@@ -1,13 +1,6 @@
 import React, { useRef } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-
-const otpSchema = Yup.object().shape({
-  otp: Yup.string()
-    .length(4, "OTP must be 4 digits")
-    .matches(/^\d+$/, "OTP must be numeric")
-    .required("OTP is required"),
-});
+import { otpSchema } from "./validations";
 
 const OtpForm: React.FC = () => {
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -23,14 +16,14 @@ const OtpForm: React.FC = () => {
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text");
-    
+
     if (/^\d{4}$/.test(pastedData)) {
       formik.setFieldValue("otp", pastedData);
       inputRefs.current[3]?.focus();
     }
   };
 
-  const handleInputChange = (value:string, index: number) => {
+  const handleInputChange = (value: string, index: number) => {
     const otpArray = formik.values.otp.split("");
     otpArray[index] = value.replace(/[^0-9]/g, "");
     formik.setFieldValue("otp", otpArray.join(""));
@@ -40,7 +33,10 @@ const OtpForm: React.FC = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
     if (e.key === "Backspace" && !formik.values.otp[index] && index > 0) {
       const otpArray = formik.values.otp.split("");
       otpArray[index - 1] = "";
@@ -52,9 +48,12 @@ const OtpForm: React.FC = () => {
   return (
     <div className="max-w-md mx-auto text-center bg-colors-lightComponent dark:bg-colors-darkComponent px-4 sm:px-8 py-10 rounded-xl shadow">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold mb-1 dark:text-white">Email Verification</h1>
+        <h1 className="text-2xl font-bold mb-1 dark:text-white">
+          Email Verification
+        </h1>
         <p className="text-[15px] text-slate-400">
-          Enter the 4-digit verification code that was sent to your registerd email.
+          Enter the 4-digit verification code that was sent to your registerd
+          email.
         </p>
       </header>
       <form onSubmit={formik.handleSubmit}>
