@@ -26,3 +26,12 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
 }
+
+
+export const googleAuthEmploy = async (req: Request, res: Response): Promise<void> => {
+    try {
+
+    } catch (error) {
+        res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
+    }
+}
