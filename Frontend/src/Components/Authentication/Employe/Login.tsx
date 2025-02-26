@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "./validations";
 
+
 type FormValue = {
   email: string;
   password: string;
@@ -62,7 +63,7 @@ const Login = () => {
           Login
         </h1>
         <div className="flex w-full items-center flex-col md:flex-row md:gap-10">
-          <img src={login} className=" hidden md:block w-[270px]" />
+          <img src={login} className="hidden md:block w-[270px]" />
           <div className="flex flex-col">
             <form onSubmit={formik.handleSubmit}>
               {inputFields.map((input, index) => (
