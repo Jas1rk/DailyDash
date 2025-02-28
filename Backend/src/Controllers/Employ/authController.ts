@@ -5,13 +5,14 @@ import Employ from '../../Schema/employSchema'
 
 export const registerEmploy = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log(req.body)
-        // const { employEmail } = req.body
-        // const isExistEmail = await Employ.findOne({ email: employEmail })
-        // if (isExistEmail) {
-        //     res.status(httpStatus_Code.NoAccess).json({ message: "The Email you entered is already exist" })
-        //     return
-        // }
+        console.log("there is a man ",req.body)
+        const { employEmail } = req.body
+        const isExistEmail = await Employ.findOne({ email: employEmail })
+        if (isExistEmail) {
+            res.status(httpStatus_Code.NoAccess).json({ message: "The Email you entered is already exist" })
+            return
+        }
+        
 
 
     } catch (error) {
