@@ -6,10 +6,12 @@ import {
 import LoginPage from "../Pages/LoginPage.tsx";
 import OtpPage from "../Pages/OtpPage.tsx";
 import SignupPage from "../Pages/SignupPage.tsx";
+import App from "../App.tsx";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
+    element:<App/>,
     children: [
       {
         path: "/",
