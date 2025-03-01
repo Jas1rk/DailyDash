@@ -128,7 +128,6 @@ const Signup: React.FC = () => {
           <div className="mt-3 flex flex-col gap-4 overflow-hidden">
             <GoogleLogin
               onSuccess={(response: CredentialResponse) => {
-                console.log("Google Login Success:", response);
                 googleLogin(response.credential);
               }}
               onError={() => console.error("Google Login Failed")}

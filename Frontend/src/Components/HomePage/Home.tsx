@@ -13,6 +13,7 @@ import { IoVideocamOutline } from "react-icons/io5";
 import { CiKeyboard } from "react-icons/ci";
 import { useState } from "react";
 
+
 const slideImages = [
   { image: swiper1, title: "Conversation" },
   { image: swiper2, title: "Meeting" },
@@ -24,7 +25,6 @@ const slideImages = [
 
 const Home = () => {
   const [linkInput, setLinkInput] = useState<string>("");
-  console.log("the damn link is here", linkInput);
 
   const handle = () => {
     if (linkInput) {
@@ -32,6 +32,8 @@ const Home = () => {
       return;
     }
   };
+
+
 
   return (
     <div className="flex py-5 px-5 w-full h-screen flex-col relative">
@@ -47,7 +49,6 @@ const Home = () => {
             <CommonButton icon={<IoVideocamOutline />}>
               New meeting
             </CommonButton>
-
             <CommonInput
               type="text"
               placeholder="Enter your link"
@@ -91,7 +92,7 @@ const Home = () => {
           {slideImages.map((slide, index) => (
             <SwiperSlide key={index}>
               <img src={slide.image} alt="swip1" />
-              <h1 className="text-white text-center mt-2">{slide.title}</h1>
+              <h1 className="text-colors-darkText dark:text-colors-lightText text-center mt-2">{slide.title}</h1>
             </SwiperSlide>
           ))}
         </Swiper>

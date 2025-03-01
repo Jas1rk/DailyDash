@@ -18,6 +18,7 @@ export { default as CommonButton } from '../Components/Common/Button'
 export { default as CommonInput } from '../Components/Common/Input'
 export { default as Error404 } from '../Components/Common/404'
 export { default as DailyDashLogo } from '../Components/Common/MainLogo'
+export { default as SpinnerLoading } from '../Components/Common/LoadSpinner'
 
 
 
