@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import httpStatus_Code from "../../Enums/httpStatusCode";
 import Employ from '../../Schema/employSchema'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const googleClientId = process.env.GOOGLE_CLIENT_ID
 
 
 export const registerEmploy = async (req: Request, res: Response): Promise<void> => {
