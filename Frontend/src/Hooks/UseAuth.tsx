@@ -5,7 +5,6 @@ const useAuthHandler = () => {
   const googleLogin = async (credential: string | undefined): Promise<void> => {
     console.log("Google Credential Received:", credential);
     try {
-        console.log("Sending request to:", `${backendUrl}/employ/google/auth`);
       const response = await axios.post(
         `${backendUrl}/employ/google/auth`,
         { token: credential },
