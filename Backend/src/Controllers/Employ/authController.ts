@@ -4,6 +4,9 @@ import Employ from '../../Schema/employSchema'
 import dotenv from 'dotenv'
 dotenv.config()
 import { LoginTicket, OAuth2Client } from "google-auth-library";
+import { createAccessToken, createRefreshToken } from "../../Utils/jwt";
+import { EmployItems } from "../../Interface/interface";
+
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID
 const client = new OAuth2Client(googleClientId)
@@ -54,12 +57,50 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
             res.status(httpStatus_Code.Unauthorized).json({ message: "Login failed. Failed to retrieve user data" })
             return
         }
-        const { email } = payload
+
+        const { email, name, picture } = payload
         if (!email) {
             res.status(httpStatus_Code.Unauthorized).json({ message: "Email is not provided while google authentication." })
             return
         }
-        
+
+        const employ: EmployItems | null = await Employ.findOne({ email: email })
+        if (!employ) {
+            const newEmploy = new Employ({
+                email: email,
+                name: name,
+                profilePicture: picture,
+                authType: "google",
+            })
+            await newEmploy.save()
+            const accessToken = createAccessToken(newEmploy.id)
+            const refreshToken = createRefreshToken(newEmploy.id)
+
+            res.cookie("accessToken", accessToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+                maxAge: 24 * 60 * 60 * 1000,
+            });
+
+
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+                maxAge: 7 * 24 * 60 * 60 * 1000,
+            });
+
+            res.status(httpStatus_Code.OK).json({
+                message: "Login successful",
+                employ: {
+                    id: newEmploy._id,
+                    name: newEmploy.name,
+                    email: newEmploy.email,
+                    profilePicture: newEmploy.profilePicture,
+                },
+            });
+        }
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
