@@ -73,6 +73,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                 authType: "google",
             })
             await newEmploy.save()
+            console.log("the damn thing saved",newEmploy)
             const accessToken = createAccessToken(newEmploy.id)
             const refreshToken = createRefreshToken(newEmploy.id)
 
@@ -101,6 +102,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                 },
             });
         }
+        
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
