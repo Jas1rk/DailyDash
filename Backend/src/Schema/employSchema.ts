@@ -2,6 +2,11 @@ import mongoose, { Schema } from "mongoose";
 import { EmployItems } from "../Interface/interface";
 
 const employSchema: Schema = new Schema<EmployItems>({
+
+    employId: {
+        type: String
+    },
+
     email: {
         type: String
     },

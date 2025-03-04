@@ -14,6 +14,7 @@ import { CiKeyboard } from "react-icons/ci";
 import { useState } from "react";
 
 
+
 const slideImages = [
   { image: swiper1, title: "Conversation" },
   { image: swiper2, title: "Meeting" },
@@ -32,6 +33,8 @@ const Home = () => {
       return;
     }
   };
+
+  
 
 
 
