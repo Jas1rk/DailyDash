@@ -8,7 +8,9 @@ import { createAccessToken, createRefreshToken } from "../../Utils/jwt";
 import { EmployItems } from "../../Interface/interface";
 
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID
+
+
+const googleClientId:string = process.env.GOOGLE_CLIENT_ID as string
 const client = new OAuth2Client(googleClientId)
 
 
