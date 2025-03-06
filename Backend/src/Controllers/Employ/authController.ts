@@ -2,10 +2,11 @@ import { Request, Response } from "express";
 import httpStatus_Code from "../../Enums/httpStatusCode";
 import Employ from '../../Schema/employSchema'
 import dotenv from 'dotenv'
-dotenv.config()
 import { LoginTicket, OAuth2Client } from "google-auth-library";
 import { createAccessToken, createRefreshToken } from "../../Utils/jwt";
 import { EmployItems } from "../../Interface/interface";
+import { v4 as uuidv4 } from 'uuid'
+dotenv.config()
 
 
 
@@ -77,7 +78,9 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
             await newEmploy.save()
             console.log("the damn thing saved",newEmploy)
             const accessToken = createAccessToken(newEmploy.id)
+            console.log("Here is the access Token",accessToken)
             const refreshToken = createRefreshToken(newEmploy.id)
+            console.log("Here is the Access Token",refreshToken)
 
             res.cookie("accessToken", accessToken, {
                 httpOnly: true,
