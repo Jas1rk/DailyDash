@@ -14,6 +14,7 @@ interface Auth extends Request {
 
 function verifyToken(req: Auth, res: Response, next: NextFunction): void {
     const accessToken: string | undefined = req.cookies?.accessToken;
+    console.log("The access=Token in  middleware",accessToken)
  
     if (!accessToken) {
        return handleRefreshToken(req, res, next);
@@ -29,12 +30,15 @@ function verifyToken(req: Auth, res: Response, next: NextFunction): void {
        next();
     });
  };
+
+ console.log("the handleAccessToken verify function",verifyToken)
  
  
  
  function handleRefreshToken(req: Auth, res: Response, next: NextFunction): void {
     try {
        const refreshToken: string | undefined = req.cookies?.refreshToken;
+       console.log("the refresh=token in middleware",refreshToken)
  
        if (!refreshToken) {
           throw {
@@ -68,5 +72,7 @@ function verifyToken(req: Auth, res: Response, next: NextFunction): void {
        next(error);
     };
  };
+
+ console.log("the refresh token function ",handleRefreshToken)
  
  export default verifyToken;
