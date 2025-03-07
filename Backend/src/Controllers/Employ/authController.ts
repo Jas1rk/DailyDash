@@ -45,6 +45,7 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
 
 
 export const googleAuthentication = async (req: Request, res: Response): Promise<void> => {
+    const customid:string = uuidv4()
     try {
         const { token } = req.body
         if (!token) {
@@ -70,6 +71,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
         const employ: EmployItems | null = await Employ.findOne({ email: email })
         if (!employ) {
             const newEmploy = new Employ({
+                employId:customid,
                 email: email,
                 name: name,
                 profilePicture: picture,
@@ -100,7 +102,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
             res.status(httpStatus_Code.OK).json({
                 message: "Login successful",
                 employ: {
-                    id: newEmploy._id,
+                    id: newEmploy.employId,
                     name: newEmploy.name,
                     email: newEmploy.email,
                     profilePicture: newEmploy.profilePicture,
