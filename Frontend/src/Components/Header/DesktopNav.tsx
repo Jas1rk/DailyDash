@@ -31,6 +31,7 @@ const DesktopNav = () => {
 
             <DarkModeToggle />
           </div>
+          {/* <img src="" alt="profile image" /> */}
           <div className="md:hidden cursor-pointer hover:text-colors-hoverYellow ">
             <DarkModeToggle />
           </div>
