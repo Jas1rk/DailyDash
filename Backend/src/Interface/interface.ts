@@ -5,4 +5,5 @@ export interface EmployItems {
     number?: number;
     profilePicture?: string;
     password?: string;
+    authType?:string
 }

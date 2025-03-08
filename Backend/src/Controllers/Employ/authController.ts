@@ -11,7 +11,7 @@ dotenv.config()
 
 
 
-const googleClientId:string = process.env.GOOGLE_CLIENT_ID as string
+const googleClientId: string = process.env.GOOGLE_CLIENT_ID as string
 const client = new OAuth2Client(googleClientId)
 
 
@@ -45,7 +45,8 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
 
 
 export const googleAuthentication = async (req: Request, res: Response): Promise<void> => {
-    const customid:string = uuidv4()
+    const customId: string = uuidv4()
+    console.log("custom id is here ", customId)
     try {
         const { token } = req.body
         if (!token) {
@@ -70,19 +71,19 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
 
         const employ: EmployItems | null = await Employ.findOne({ email: email })
         if (!employ) {
-            const newEmploy = new Employ({
-                employId:customid,
+            const newEmploy = new Employ<EmployItems>({
+                employId: customId,
                 email: email,
                 name: name,
                 profilePicture: picture,
                 authType: "google",
             })
             await newEmploy.save()
-            console.log("the damn thing saved",newEmploy)
+            console.log("the damn thing saved", newEmploy)
             const accessToken = createAccessToken(newEmploy.id)
-            console.log("Here is the access Token",accessToken)
+            console.log("Here is the access Token", accessToken)
             const refreshToken = createRefreshToken(newEmploy.id)
-            console.log("Here is the Access Token",refreshToken)
+            console.log("Here is the Access Token", refreshToken)
 
             res.cookie("accessToken", accessToken, {
                 httpOnly: true,
@@ -109,7 +110,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                 },
             });
         }
-        
+
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
