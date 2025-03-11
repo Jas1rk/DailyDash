@@ -4,8 +4,10 @@ import { PiSignInFill } from "react-icons/pi";
 import { CommonButton, DailyDashLogo, DarkModeToggle, MobileNavbar } from "..";
 
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 const DesktopNav = () => {
+  const { employData }: any = useAuth();
   return (
     <>
       <header className="bg-transparent dark:text-white dark:bg-whiteScreen  z-50 ">
@@ -22,16 +24,24 @@ const DesktopNav = () => {
             ))}
           </ul>
           <div className="hidden md:flex gap-5">
-            <Link to="/login">
-              <CommonButton icon={<PiSignInFill />}>Login</CommonButton>
-            </Link>
-            <Link to="signup">
-              <CommonButton icon={<SiGnuprivacyguard />}>Register</CommonButton>
-            </Link>
+            {employData ? (
+              <img src={employData} alt="profile image" />
+            ) : (
+              <>
+                <Link to="/login">
+                  <CommonButton icon={<PiSignInFill />}>Login</CommonButton>
+                </Link>
+                <Link to="signup">
+                  <CommonButton icon={<SiGnuprivacyguard />}>
+                    Register
+                  </CommonButton>
+                </Link>
+              </>
+            )}
 
             <DarkModeToggle />
           </div>
-          {/* <img src="" alt="profile image" /> */}
+
           <div className="md:hidden cursor-pointer hover:text-colors-hoverYellow ">
             <DarkModeToggle />
           </div>
