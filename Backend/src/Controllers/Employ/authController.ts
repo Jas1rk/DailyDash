@@ -19,13 +19,14 @@ const client = new OAuth2Client(googleClientId)
 
 export const registerEmploy = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log("there is a man ", req.body)
         const { employEmail } = req.body
         const isExistEmail = await Employ.findOne({ email: employEmail })
         if (isExistEmail) {
             res.status(httpStatus_Code.NoAccess).json({ message: "The Email you entered is already exist" })
             return
         }
+
+        /// otp sending to email logic here 
 
 
 
@@ -37,6 +38,10 @@ export const registerEmploy = async (req: Request, res: Response): Promise<void>
 
 export const employAuthOtp = async (req: Request, res: Response): Promise<void> => {
     try {
+
+        /// after sending the otp and checking with database
+
+        // saving employ data in  database 
 
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
