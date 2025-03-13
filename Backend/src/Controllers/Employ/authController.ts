@@ -120,3 +120,14 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
 }
+
+
+export const loginEmploy = async(req:Request,res:Response):Promise<void> => {
+    try{
+        console.log(req.body)
+        const {employEmail,employPassword} = req.body
+        
+    }catch(error){
+        res.status(httpStatus_Code.ServiceUnavailable).json({message:'Service Unavailable'})
+    }
+}

@@ -6,9 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "./validations";
+import axios from "axios";
+import { backendUrl } from "../../../Service/BackendUrl";
 
-
-type FormValue = {
+type FormValueType = {
   email: string;
   password: string;
 };
@@ -17,7 +18,7 @@ const inputFields: {
   label: string;
   type: string;
   placeHolder: string;
-  name: keyof FormValue;
+  name: keyof FormValueType;
 }[] = [
   {
     label: "Email",
@@ -36,21 +37,24 @@ const inputFields: {
 const Login = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const formik = useFormik<FormValue>({
+  const formik = useFormik<FormValueType>({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: loginValidationSchema,
-    onSubmit: (values) => {
-      console.log("Form Submitted", values);
+    onSubmit: (values, { resetForm }) => {
+      handleGoogleLogin(values);
+      resetForm()
     },
   });
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async(values: FormValueType) => {
     try {
-      const result = "hello";
-      console.log("here is the damn result", result);
+      const response = await axios.post(`${backendUrl}/employ/login-employ`,{
+        employEmail:values.email,
+        employPassword:values.password
+      })
     } catch (error) {
       console.log("Error in Login", error);
     }
