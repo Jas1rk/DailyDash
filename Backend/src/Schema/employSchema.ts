@@ -21,6 +21,13 @@ const employSchema: Schema = new Schema<EmployItems>({
     },
     password: {
         type: String
+    },
+    authType: {
+        type: String
+    },
+    isBlocked: {
+        type: Boolean,
+        default: false
     }
 
 }, { versionKey: false })

@@ -6,6 +6,7 @@ import { LoginTicket, OAuth2Client } from "google-auth-library";
 import { createAccessToken, createRefreshToken } from "../../Utils/jwt";
 import { EmployItems } from "../../Interface/interface";
 import { v4 as uuidv4 } from 'uuid'
+import bcrypt from 'bcrypt'
 dotenv.config()
 
 
@@ -113,7 +114,7 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                     email: newEmploy.email,
                     profilePicture: newEmploy.profilePicture,
                 },
-            });
+            })
         }
 
     } catch (error) {
@@ -122,12 +123,36 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
 }
 
 
-export const loginEmploy = async(req:Request,res:Response):Promise<void> => {
-    try{
+export const loginEmploy = async (req: Request, res: Response): Promise<void> => {
+    try {
         console.log(req.body)
-        const {employEmail,employPassword} = req.body
+        const { employEmail, employPassword } = req.body
+        const findEmploy = await Employ.findOne<EmployItems>({ email: employEmail })
+        if (!findEmploy) {
+            res.status(httpStatus_Code.NotFound).json({ message: 'The provided email is not exist' })
+            return
+        }
+        if (findEmploy.isBlocked) {
+            res.status(httpStatus_Code.NoAccess).json({ message: 'You have been blocked' })
+        }
+
+        if (!findEmploy.password || !(await bcrypt.compare(employPassword, findEmploy.password))) {
+            res.status(httpStatus_Code.Unauthorized).json({ message: 'Incorrect password' });
+            return;
+        }
+
+        const EmployData: Partial<EmployItems> = {
+            employId: findEmploy.employId,
+            email: findEmploy.email,
+            name: findEmploy.name,
+            number: findEmploy.number,
+            profilePicture: findEmploy.profilePicture,
+        }
+
         
-    }catch(error){
-        res.status(httpStatus_Code.ServiceUnavailable).json({message:'Service Unavailable'})
+
+
+    } catch (error) {
+        res.status(httpStatus_Code.ServiceUnavailable).json({ message: 'Service Unavailable' })
     }
 }

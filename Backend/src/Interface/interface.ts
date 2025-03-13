@@ -5,5 +5,6 @@ export interface EmployItems {
     number?: number;
     profilePicture?: string;
     password?: string;
-    authType?:string
+    authType?:string;
+    isBlocked?:boolean
 }
