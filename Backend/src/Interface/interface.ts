@@ -1,9 +1,10 @@
 export interface EmployItems {
-    employId?:string
+    employId?: string
     email?: string;
     name?: string;
     number?: number;
     profilePicture?: string;
     password?: string;
-    authType?:string
+    authType?: string;
+    isBlocked?: boolean
 }
