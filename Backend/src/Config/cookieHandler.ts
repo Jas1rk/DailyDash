@@ -16,6 +16,4 @@ export const cookieHandler = (res: Response, accessToken: string, refreshToken: 
         ...cookieOptions,
         maxAge: 7 * 24 * 60 * 60 * 1000,
     })
-
-
 }
