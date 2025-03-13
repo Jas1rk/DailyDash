@@ -7,6 +7,7 @@ import { createAccessToken, createRefreshToken } from "../../Utils/jwt";
 import { EmployItems } from "../../Interface/interface";
 import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
+import { cookieHandler } from "../../Config/cookieHandler";
 dotenv.config()
 
 
@@ -148,6 +149,8 @@ export const loginEmploy = async (req: Request, res: Response): Promise<void> =>
             number: findEmploy.number,
             profilePicture: findEmploy.profilePicture,
         }
+
+        // cookieHandler(res,)
 
         
 
