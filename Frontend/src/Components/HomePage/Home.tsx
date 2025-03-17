@@ -11,7 +11,9 @@ import "swiper/css/effect-cube";
 import { CommonButton, CommonInput } from "..";
 import { IoVideocamOutline } from "react-icons/io5";
 import { CiKeyboard } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { toast } from "sonner";
 
 
 
@@ -26,6 +28,14 @@ const slideImages = [
 
 const Home = () => {
   const [linkInput, setLinkInput] = useState<string>("");
+  const location = useLocation()
+
+  useEffect(()=>{
+    if(location?.state?.message){
+      toast.success(location.state.message)
+    }
+  },[location.state])
+  
 
   const handle = () => {
     if (linkInput) {

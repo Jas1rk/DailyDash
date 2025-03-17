@@ -86,26 +86,10 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                 authType: "google",
             })
             await newEmploy.save()
-            console.log("the damn thing saved", newEmploy)
             const accessToken = createAccessToken(newEmploy.id)
-            console.log("Here is the access Token", accessToken)
             const refreshToken = createRefreshToken(newEmploy.id)
-            console.log("Here is the Access Token", refreshToken)
 
-            res.cookie("accessToken", accessToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "strict",
-                maxAge: 24 * 60 * 60 * 1000,
-            });
-
-
-            res.cookie("refreshToken", refreshToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "strict",
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-            });
+            cookieHandler(res, accessToken, refreshToken)
 
             res.status(httpStatus_Code.OK).json({
                 message: "Login successful",
@@ -152,7 +136,7 @@ export const loginEmploy = async (req: Request, res: Response): Promise<void> =>
 
         // cookieHandler(res,)
 
-        
+
 
 
     } catch (error) {

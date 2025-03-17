@@ -2,12 +2,13 @@ import { useState } from "react";
 import login from "../../../assets/login.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "./validations";
 import axios from "axios";
 import { backendUrl } from "../../../Service/BackendUrl";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import useAuthHandler from "../../../Hooks/UseAuth";
+
 
 type FormValueType = {
   email: string;
@@ -36,6 +37,8 @@ const inputFields: {
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const googleLogin = useAuthHandler();
+  
 
   const formik = useFormik<FormValueType>({
     initialValues: {
@@ -125,31 +128,17 @@ const Login = () => {
               <div className="flex-grow h-[1px] bg-gray-400"></div>
             </div>
             <div className="mt-3 flex flex-col gap-4 overflow-hidden">
-              <div
-                className="flex items-center justify-around bg-white p-2 border-2 cursor-pointer  rounded-md"
-                onClick={handleGoogleLogin}
-              >
-                <FcGoogle className="hover:text-colors-primaryYellow text-2xl cursor-pointer dark:text-gray-400 dark:hover:text-colors-primaryYellow" />
-                <p className="font-bold md:font-semibold">
-                  Sign in with Google
-                </p>
-              </div>
-              <div className="w-full flex items-center justify-around shadow-md bg-black p-2 py-3 rounded-md ">
-                <FaGithub className="hover:text-colors-primaryYellow text-2xl cursor-pointer text-white dark:hover:text-colors-primaryYellow" />
-                <p className="text-white font-bold md:font-semibold">
-                  Sign in with GitHub
-                </p>
-              </div>
-              <p className="dark:text-white text-center">
-                Dont have an account ? {""}
-                <Link
-                  to="/signup"
-                  className="text-colors-primaryYellow font-bold md:font-semibold"
-                >
-                  Register
-                </Link>
-              </p>
+            <GoogleLogin
+              onSuccess={(response: CredentialResponse) => {
+                googleLogin(response.credential);
+              }}
+              onError={() => console.error("Google Login Failed")}
+            />
+            <div className="w-full flex items-center justify-around shadow-md bg-black p-2 py-3 rounded-md">
+              <FaGithub className="hover:text-colors-primaryYellow text-2xl cursor-pointer text-white dark:hover:text-colors-primaryYellow" />
+              <p className="text-white font-bold md:font-semibold">Sign in with GitHub</p>
             </div>
+          </div>
           </div>
         </div>
       </div>

@@ -8,8 +8,8 @@ import {
 import { EmployType } from "../Types/type";
 
 type AuthContextType = {
-  setUserData: () => void;
-  userData: string;
+  employData: EmployType | null;
+  setEmployData: (data: EmployType | null) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
