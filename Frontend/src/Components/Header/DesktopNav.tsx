@@ -8,6 +8,7 @@ import { useAuth } from "../../Context/AuthContext";
 
 const DesktopNav = () => {
   const { employData }: any = useAuth();
+
   return (
     <>
       <header className="bg-transparent dark:text-white dark:bg-whiteScreen  z-50 ">
@@ -25,7 +26,11 @@ const DesktopNav = () => {
           </ul>
           <div className="hidden md:flex gap-5">
             {employData ? (
-              <img src={employData} alt="profile image" />
+              <img
+                src={employData?.profilePicture}
+                alt="profile image"
+                className="md:w-[40px] md:h-[40px] h-[30px] w-[30px] rounded-full flex items-center justify-center cursor-pointer"
+              />
             ) : (
               <>
                 <Link to="/login">

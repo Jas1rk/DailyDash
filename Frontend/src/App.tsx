@@ -4,6 +4,7 @@ import { useLoader } from "./Context/LoaderContext";
 import { useEffect } from "react";
 import { SpinnerLoading } from "./Components";
 import useNetworkSpeed from "./Hooks/UseNetworkSpeed";
+import { Toaster } from "sonner";
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
     <>
       {loading && <SpinnerLoading />}
       <Outlet />
+      <Toaster/>
     </>
   );
 }
