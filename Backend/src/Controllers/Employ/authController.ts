@@ -8,6 +8,9 @@ import { EmployItems } from "../../Interface/interface";
 import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
 import { cookieHandler } from "../../Config/cookieHandler";
+import { emailVerification } from "../../Utils/nodemailer";
+import { generateOtp } from "../../Config/otpgenerator";
+import Otp from "../../Schema/otpSchema";
 dotenv.config()
 
 
@@ -28,9 +31,16 @@ export const registerEmploy = async (req: Request, res: Response): Promise<void>
             return
         }
 
-        /// otp sending to email logic here 
+        const OTP = generateOtp()
 
+        await Otp.create({
+            email: employEmail,
+            otp: OTP,
+            expiresAt: new Date(Date.now() + 60 * 1000)
+        })
 
+        await emailVerification(employEmail, OTP)
+        res.status(httpStatus_Code.OK).json({ message: "OTP sent successfully" })
 
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
@@ -40,10 +50,26 @@ export const registerEmploy = async (req: Request, res: Response): Promise<void>
 
 export const employAuthOtp = async (req: Request, res: Response): Promise<void> => {
     try {
+        const { enteredOTP, employEmail } = req.body
+        const storedOTP = await Otp.findOne({ email: employEmail }).sort({ createdAt: -1 })
 
-        /// after sending the otp and checking with database
+        if (!storedOTP) {
+            res.status(httpStatus_Code.NotFound).json({ message: "OTP not found" });
+            return;
+        }
 
-        // saving employ data in  database 
+        if (new Date() > storedOTP.expiresAt!) {
+            await Otp.deleteOne({ _id: storedOTP._id })
+            res.status(httpStatus_Code.Expired).json({ message: "OTP has been expired" })
+            return 
+        }
+
+        if (enteredOTP !== storedOTP) {
+            res.status(httpStatus_Code.NotFound).json({ message: "Provided otp is incorrect" })
+            return
+        }
+
+
 
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
@@ -53,7 +79,6 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
 
 export const googleAuthentication = async (req: Request, res: Response): Promise<void> => {
     const customId: string = uuidv4()
-    console.log("custom id is here ", customId)
     try {
         const { token } = req.body
         if (!token) {
