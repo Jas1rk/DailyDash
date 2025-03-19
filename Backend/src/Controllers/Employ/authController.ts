@@ -49,6 +49,7 @@ export const registerEmploy = async (req: Request, res: Response): Promise<void>
 
 
 export const employAuthOtp = async (req: Request, res: Response): Promise<void> => {
+    const customId: string = uuidv4()
     try {
         const { enteredOTP, employEmail } = req.body
         const storedOTP = await Otp.findOne({ email: employEmail }).sort({ createdAt: -1 })
@@ -68,6 +69,12 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
             res.status(httpStatus_Code.NotFound).json({ message: "Provided otp is incorrect" })
             return
         }
+
+        const newEmploy = new Employ<EmployItems>({
+              employId : customId,
+              email:employEmail,
+              
+        })
 
 
 
