@@ -1,9 +1,14 @@
 import React, { useRef } from "react";
 import { useFormik } from "formik";
 import { otpSchema } from "./validations";
+import { useLocation } from "react-router-dom";
 
 const OtpForm: React.FC = () => {
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const location = useLocation();
+
+  const { employName, employEmail, employMobile, employPassword } =
+    location.state;
 
   const formik = useFormik({
     initialValues: { otp: "" },
