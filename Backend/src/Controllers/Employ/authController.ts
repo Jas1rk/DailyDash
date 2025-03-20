@@ -11,6 +11,7 @@ import { cookieHandler } from "../../Config/cookieHandler";
 import { emailVerification } from "../../Utils/nodemailer";
 import { generateOtp } from "../../Config/otpgenerator";
 import Otp from "../../Schema/otpSchema";
+import { hashPassword } from "../../Config/bcrypt";
 dotenv.config()
 
 
@@ -51,7 +52,7 @@ export const registerEmploy = async (req: Request, res: Response): Promise<void>
 export const employAuthOtp = async (req: Request, res: Response): Promise<void> => {
     const customId: string = uuidv4()
     try {
-        const { enteredOTP, employEmail } = req.body
+        const { enteredOTP, employName, employEmail, employMobile, employPassword } = req.body
         const storedOTP = await Otp.findOne({ email: employEmail }).sort({ createdAt: -1 })
 
         if (!storedOTP) {
@@ -62,7 +63,7 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
         if (new Date() > storedOTP.expiresAt!) {
             await Otp.deleteOne({ _id: storedOTP._id })
             res.status(httpStatus_Code.Expired).json({ message: "OTP has been expired" })
-            return 
+            return
         }
 
         if (enteredOTP !== storedOTP) {
@@ -70,14 +71,18 @@ export const employAuthOtp = async (req: Request, res: Response): Promise<void> 
             return
         }
 
+        const securePassword = await hashPassword(employPassword)
+
         const newEmploy = new Employ<EmployItems>({
-              employId : customId,
-              email:employEmail,
-              
+            employId: customId,
+            name: employName,
+            email: employEmail,
+            number: employMobile,
+            password: securePassword
         })
-
-
-
+        await newEmploy.save()
+        await Otp.deleteOne({ _id: storedOTP._id })
+        res.status(httpStatus_Code.OK).json({ message: "Registration completed successfully" })
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: "Service Unavailable" })
     }
