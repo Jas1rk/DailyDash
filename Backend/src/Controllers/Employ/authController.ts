@@ -11,7 +11,7 @@ import { cookieHandler } from "../../Config/cookieHandler";
 import { emailVerification } from "../../Utils/nodemailer";
 import { generateOtp } from "../../Config/otpgenerator";
 import Otp from "../../Schema/otpSchema";
-import { hashPassword } from "../../Config/bcrypt";
+import { comparePassword, hashPassword } from "../../Config/bcrypt";
 dotenv.config()
 
 
@@ -137,6 +137,8 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
                     profilePicture: newEmploy.profilePicture,
                 },
             })
+        } else {
+            res.status(httpStatus_Code.NotFound).json({ message: "This email is already exists" })
         }
 
     } catch (error) {
@@ -147,7 +149,6 @@ export const googleAuthentication = async (req: Request, res: Response): Promise
 
 export const loginEmploy = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log(req.body)
         const { employEmail, employPassword } = req.body
         const findEmploy = await Employ.findOne<EmployItems>({ email: employEmail })
         if (!findEmploy) {
@@ -156,9 +157,10 @@ export const loginEmploy = async (req: Request, res: Response): Promise<void> =>
         }
         if (findEmploy.isBlocked) {
             res.status(httpStatus_Code.NoAccess).json({ message: 'You have been blocked' })
+            return
         }
 
-        if (!findEmploy.password || !(await bcrypt.compare(employPassword, findEmploy.password))) {
+        if (!findEmploy.password || !(await comparePassword(employPassword, findEmploy.password))) {
             res.status(httpStatus_Code.Unauthorized).json({ message: 'Incorrect password' });
             return;
         }
@@ -171,11 +173,11 @@ export const loginEmploy = async (req: Request, res: Response): Promise<void> =>
             profilePicture: findEmploy.profilePicture,
         }
 
-        // cookieHandler(res,)
+        const accessToken = createAccessToken(findEmploy.id)
+        const refreshToken = createRefreshToken(findEmploy.id)
 
-
-
-
+        cookieHandler(res, accessToken, refreshToken)
+        res.status(httpStatus_Code.OK).json(EmployData)
     } catch (error) {
         res.status(httpStatus_Code.ServiceUnavailable).json({ message: 'Service Unavailable' })
     }
